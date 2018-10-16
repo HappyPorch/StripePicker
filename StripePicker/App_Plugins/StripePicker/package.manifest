@@ -1,0 +1,21 @@
+﻿{
+  "propertyEditors": [
+    {
+      "alias": "stripepicker.productpicker",
+      "name": "Stripe Product Picker",
+      "editor": {
+        "view": "~/App_Plugins/StripePicker/stripepicker.productpicker.htm"
+      }
+    },
+    {
+      "alias": "stripepicker.planpicker",
+      "name": "Stripe Plan Picker",
+      "editor": {
+        "view": "~/App_Plugins/StripePicker/stripepicker.planpicker.htm"
+      }
+    }
+  ],
+  "javascript": [
+    "~/App_Plugins/StripePicker/stripepicker.controller.js"
+  ]
+}
