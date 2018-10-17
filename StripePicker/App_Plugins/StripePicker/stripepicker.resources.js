@@ -26,7 +26,7 @@
             }
         }
         catch (error) {
-            stripeService.products.error = error;
+            stripeService.products.error = error.data.ExceptionMessage;
         }
 
         stripeService.products.ready = true;
@@ -58,7 +58,7 @@
             }
         }
         catch (error) {
-            stripeService.plans.error = res.data;
+            stripeService.plans.error = error.data.ExceptionMessage;
         }
 
         stripeService.plans.ready = true;
