@@ -248,6 +248,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\StripePicker\stripepicker.plan.controller.js" />
+    <Content Include="App_Plugins\StripePicker\stripepicker.resources.js" />
     <Content Include="config\imageprocessor\security.config" />
     <Content Include="config\imageprocessor\processing.config" />
     <Content Include="config\imageprocessor\cache.config" />
@@ -287,9 +289,9 @@
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.controller.js" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.htm" />
     <Content Include="App_Plugins\ModelsBuilder\modelsbuilder.resource.js" />
-    <Content Include="App_Plugins\StripePicker\stripepicker.planpicker.htm" />
-    <Content Include="App_Plugins\StripePicker\stripepicker.productpicker.htm" />
-    <Content Include="App_Plugins\StripePicker\stripepicker.controller.js" />
+    <Content Include="App_Plugins\StripePicker\stripepicker.plan.picker.htm" />
+    <Content Include="App_Plugins\StripePicker\stripepicker.product.picker.htm" />
+    <Content Include="App_Plugins\StripePicker\stripepicker.product.controller.js" />
     <Content Include="config\grid.editors.config.js" />
     <Content Include="config\Lang\cs-CZ.user.xml" />
     <Content Include="config\Lang\da-DK.user.xml" />

@@ -20,9 +20,7 @@ namespace StripePicker.Backoffice.Controllers
         [HttpGet]
         public IEnumerable<ProductView> GetProducts()
         {
-            var stripeApiKey = ConfigurationManager.AppSettings["StripePicker.StripeApiKey"];
-            StripeConfiguration.SetApiKey(stripeApiKey);
-
+            SetStripeKey();
             var productService = new StripeProductService();
             StripeList<StripeProduct> productItems = productService.List(
               new StripeProductListOptions()
@@ -34,10 +32,6 @@ namespace StripePicker.Backoffice.Controllers
             var jsonProducts = productItems
                 .Select(p => new ProductView { Id = p.Id, Name = p.Name });
 
-            //var jsonProducts = new List<ProductView>();
-            //jsonProducts.Add(new ProductView { Id = "prod_DnOwteuIbOYyFB", Name = "product1" });
-            //jsonProducts.Add(new ProductView { Id = "prod_DnrgRBTTtnnb", Name = "product2" });
-
             return jsonProducts;
         }
 
@@ -45,11 +39,25 @@ namespace StripePicker.Backoffice.Controllers
         [HttpGet]
         public IEnumerable<PlanView> GetPlans()
         {
-            var jsonPlans = new List<PlanView>();
-            jsonPlans.Add(new PlanView { Id = "plan_DnOxxh34lSVMtL", Name = "plan1", Product= "prod_DnOwteuIbOYyFB" });
-            jsonPlans.Add(new PlanView { Id = "plan_rebrtbTRerg3", Name = "plan2", Product = "prod_DnrgRBTTtnnb" });
+            SetStripeKey();
+            var planService = new StripePlanService();
+            StripeList<StripePlan> planItems = planService.List(
+              new StripePlanListOptions()
+              {
+                  Limit = 10
+              }
+            );
+            var jsonPlans = planItems
+                .Select(p => new PlanView { Id = p.Id, Name = $"{p.Nickname} ({p.Amount.ToString()} {p.Currency} a {p.Interval})", Product = p.Product?.Id })
+                .ToList();
 
             return jsonPlans;
+        }
+
+        private static void SetStripeKey()
+        {
+            var stripeApiKey = ConfigurationManager.AppSettings["StripePicker.StripeApiKey"];
+            StripeConfiguration.SetApiKey(stripeApiKey);
         }
     }
 }
