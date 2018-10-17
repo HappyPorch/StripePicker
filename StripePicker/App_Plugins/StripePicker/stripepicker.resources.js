@@ -32,8 +32,10 @@
         return stripeService.products;
     };
 
+    stripeService.getProducts();
     stripeService.getPlans = function () {
         if (stripeService.plans.ready) return stripeService.plans;
+
         stripeService.plans.ready = false;
         stripeService.plans.allPlans = [];
 
@@ -41,6 +43,10 @@
             var data = res.data;
             for (var plan in data) {
                 if (data.hasOwnProperty(plan)) {
+                    var productName = stripeService.getProducts().allProducts.filter(prod => {
+                        return prod.Id === data[plan].ProductId
+                    })[0].Name;
+                    data[plan].FullName = productName + ": " + data[plan].Name;
                     stripeService.plans.allPlans.push(data[plan]);
                 }
             }
