@@ -20,8 +20,8 @@ namespace StripePicker.Backoffice.Controllers
         [HttpGet]
         public IEnumerable<ProductView> GetProducts()
         {
-            var stripeApiKey = ConfigurationManager.AppSettings["StripePicker.StripeApiKey"]; 
-            StripeConfiguration.SetApiKey("stripeApiKey");
+            var stripeApiKey = ConfigurationManager.AppSettings["StripePicker.StripeApiKey"];
+            StripeConfiguration.SetApiKey(stripeApiKey);
 
             var productService = new StripeProductService();
             StripeList<StripeProduct> productItems = productService.List(
@@ -34,7 +34,22 @@ namespace StripePicker.Backoffice.Controllers
             var jsonProducts = productItems
                 .Select(p => new ProductView { Id = p.Id, Name = p.Name });
 
+            //var jsonProducts = new List<ProductView>();
+            //jsonProducts.Add(new ProductView { Id = "prod_DnOwteuIbOYyFB", Name = "product1" });
+            //jsonProducts.Add(new ProductView { Id = "prod_DnrgRBTTtnnb", Name = "product2" });
+
             return jsonProducts;
+        }
+
+        //  /umbraco/backoffice/StripePickerPlugin/StripePicker/GetPlans
+        [HttpGet]
+        public IEnumerable<PlanView> GetPlans()
+        {
+            var jsonPlans = new List<PlanView>();
+            jsonPlans.Add(new PlanView { Id = "plan_DnOxxh34lSVMtL", Name = "plan1", Product= "prod_DnOwteuIbOYyFB" });
+            jsonPlans.Add(new PlanView { Id = "plan_rebrtbTRerg3", Name = "plan2", Product = "prod_DnrgRBTTtnnb" });
+
+            return jsonPlans;
         }
     }
 }
