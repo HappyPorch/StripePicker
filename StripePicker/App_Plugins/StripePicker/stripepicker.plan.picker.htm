@@ -1,16 +1,16 @@
 ﻿<div ng-controller="stripepicker.plan.controller">
 
-    <div ng-show="!ready && !error">
+    <div ng-show="!data.ready && !data.error">
         Fetching plans...
     </div>
 
-    <div ng-show="ready && !error">
-        <select ng-model="model.value" name="planSelect" id="planSelect" ng-options="p.Id as p.Name for p in allPlans">
+    <div ng-show="data.ready && !data.error">
+        <select ng-model="model.value" name="planSelect" id="planSelect" ng-options="p.Id as p.Name for p in data.allPlans">
             <option value=""></option>
         </select>
     </div>
 
-    <div ng-show="ready && error" class="alert alert-danger" role="alert">
+    <div ng-show="data.ready && data.error" class="alert alert-danger" role="alert">
         Unable to fetch plans from Stripe: {{error.ExceptionMessage}}
     </div>
 

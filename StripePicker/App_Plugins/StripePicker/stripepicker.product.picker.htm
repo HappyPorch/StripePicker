@@ -1,17 +1,17 @@
 ﻿<div ng-controller="stripepicker.product.controller">
 
-    <div ng-show="!ready">
+    <div ng-show="!data.ready">
         Fetching products...
     </div>
 
-    <div ng-show="ready && !error">
-        <select ng-model="model.value" name="productSelect" id="productSelect" ng-options="p.Id as p.Name for p in allProducts">
+    <div ng-show="data.ready && !data.error">
+        <select ng-model="model.value" name="productSelect" id="productSelect" ng-options="p.Id as p.Name for p in data.allProducts">
             <option value=""></option>
         </select>    
     </div>
 
-    <div ng-show="error" class="alert alert-danger" role="alert">
-        Unable to fetch products from Stripe: {{error.ExceptionMessage}}
+    <div ng-show="data.error" class="alert alert-danger" role="alert">
+        Unable to fetch products from Stripe: {{data.error.ExceptionMessage}}
     </div>
 
 </div>
