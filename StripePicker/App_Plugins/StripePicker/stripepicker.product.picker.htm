@@ -10,7 +10,7 @@
         </select>    
     </div>
 
-    <div ng-show="data.error" class="alert alert-danger" role="alert">
+    <div ng-show="data.ready && data.error" class="alert alert-danger" role="alert">
         Unable to fetch products from Stripe: {{data.error.ExceptionMessage}}
     </div>
 
