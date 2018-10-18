@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+  <files>
+    <file>
+      <guid>StripePicker.Backoffice.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>StripePicker.Backoffice.dll</orgName>
+    </file>
+    <file>
+      <guid>package.manifest</guid>
+      <orgPath>/App_Plugins/StripePicker</orgPath>
+      <orgName>package.manifest</orgName>
+    </file>
+    <file>
+      <guid>stripepicker.plan.controller.js</guid>
+      <orgPath>/App_Plugins/StripePicker</orgPath>
+      <orgName>stripepicker.plan.controller.js</orgName>
+    </file>
+    <file>
+      <guid>stripepicker.plan.picker.htm</guid>
+      <orgPath>/App_Plugins/StripePicker</orgPath>
+      <orgName>stripepicker.plan.picker.htm</orgName>
+    </file>
+    <file>
+      <guid>stripepicker.product.controller.js</guid>
+      <orgPath>/App_Plugins/StripePicker</orgPath>
+      <orgName>stripepicker.product.controller.js</orgName>
+    </file>
+    <file>
+      <guid>stripepicker.product.picker.htm</guid>
+      <orgPath>/App_Plugins/StripePicker</orgPath>
+      <orgName>stripepicker.product.picker.htm</orgName>
+    </file>
+    <file>
+      <guid>stripepicker.resources.js</guid>
+      <orgPath>/App_Plugins/StripePicker</orgPath>
+      <orgName>stripepicker.resources.js</orgName>
+    </file>
+  </files>
+  <info>
+    <package>
+      <name>Stripe Picker</name>
+      <version>0.1</version>
+      <iconUrl>http://happyporch.com/wp-content/uploads/2016/10/unspecified.png</iconUrl>
+      <license url="http://opensource.org/licenses/MIT">MIT License</license>
+      <url>https://github.com/EndzoneSoftware/StripePicker</url>
+      <requirements type="strict">
+        <major>7</major>
+        <minor>7</minor>
+        <patch>13</patch>
+      </requirements>
+    </package>
+    <author>
+      <name>Filipe Sousa</name>
+      <website>http://happyporch.com/</website>
+    </author>
+    <readme><![CDATA[]]></readme>
+  </info>
+  <DocumentTypes />
+  <Templates />
+  <Stylesheets />
+  <Macros />
+  <DictionaryItems />
+  <Languages />
+  <DataTypes>
+    <DataType Name="Stripe Plan Picker" Id="stripepicker.planpicker" Definition="9122bd54-8efa-479e-9447-b5999678e99e" DatabaseType="Nvarchar">
+      <PreValues />
+    </DataType>
+    <DataType Name="Stripe Product Picker" Id="stripepicker.productpicker" Definition="c4bd25fd-a84f-4644-b231-559d4e294a14" DatabaseType="Nvarchar">
+      <PreValues />
+    </DataType>
+  </DataTypes>
+</umbPackage>
