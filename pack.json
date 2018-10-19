@@ -1,6 +1,5 @@
 ﻿{
-    "dlls": ["stripepicker/bin/Release/StripePicker.Backoffice.dll"],
+    "dlls": ["stripepicker/StripePicker/bin/Release/StripePicker.Backoffice.dll"],
     "packageXmlTemplate": "package.xml",
     "includeFolders": ["StripePicker/App_Plugins"]
 }
-
