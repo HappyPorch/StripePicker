@@ -51,7 +51,7 @@ namespace StripePicker.Backoffice.Controllers
               }
             );
             var jsonPlans = planItems
-                .Select(p => new PlanView { Id = p.Id, Name = $"{p.Nickname} ({p.Currency} {p.Amount.ToString()}/{p.Interval})", ProductId = p.ProductId })
+                .Select(p => new PlanView { Id = p.Id, Name = p.Nickname, Currency = p.Currency, Amount = p.Amount, Interval = p.Interval, ProductId = p.ProductId })
                 .ToList();
 
             return jsonPlans;

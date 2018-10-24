@@ -22,6 +22,19 @@
         return p.Type === "service";
     }
 
+    function getCurrencySign(currency) {
+        switch (currency) {
+            case "gbp":
+                return "£";
+            case "usd":
+                return "$";
+            case "eur":
+                return "€";
+            default:
+                return currency;
+        }
+    }
+
     async function getProducts() {
         if (stripeService.products.ready) return stripeService.products;
 
@@ -63,7 +76,9 @@
                     var productName = products.allProducts.filter(prod => {
                         return prod.Id === data[plan].ProductId;
                     })[0].Name;
-                    data[plan].FullName = productName + ": " + data[plan].Name;
+                    var currencySign = getCurrencySign(data[plan].Currency);
+                    data[plan].FullName = productName + ": " + data[plan].Name + " (" + currencySign
+                        + "" + data[plan].Amount + "/" + data[plan].Interval + ")";
                     stripeService.plans.allPlans.push(data[plan]);
                 }
             }
@@ -90,7 +105,8 @@
                     var productName = skus.allProducts.filter(prod => {
                         return prod.Id === data[sku].ProductId;
                     })[0].Name;
-                    data[sku].FullName = productName + " (" + data[sku].Currency + " " + data[sku].Price + ")";
+                    var currencySign = getCurrencySign(data[sku].Currency);
+                    data[sku].FullName = productName + " (" + currencySign + "" + data[sku].Price + ")";
                     stripeService.skus.allSkus.push(data[sku]);
                 }
             }

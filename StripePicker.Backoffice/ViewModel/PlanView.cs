@@ -11,5 +11,8 @@ namespace StripePicker.Backoffice.ViewModel
         public string Id { get; set; }
         public string Name { get; set; }
         public string ProductId { get; set; }
+        public string Currency { get; internal set; }
+        public int? Amount { get; internal set; }
+        public string Interval { get; internal set; }
     }
 }
