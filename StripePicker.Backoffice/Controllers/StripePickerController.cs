@@ -1,13 +1,9 @@
 ﻿using Stripe;
 using StripePicker.Backoffice.ViewModel;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
-using Umbraco.Web.Editors;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 
@@ -16,7 +12,11 @@ namespace StripePicker.Backoffice.Controllers
     [PluginController("StripePickerPlugin")]
     public class StripePickerController : UmbracoAuthorizedApiController
     {
-        //  /umbraco/backoffice/StripePickerPlugin/StripePicker/GetProducts
+        private const int _maximumItemsToReturn = 20;
+        /// <summary>
+        /// /umbraco/backoffice/StripePickerPlugin/StripePicker/GetProducts
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<ProductView> GetProducts()
         {
@@ -25,17 +25,20 @@ namespace StripePicker.Backoffice.Controllers
             StripeList<StripeProduct> productItems = productService.List(
               new StripeProductListOptions()
               {
-                  Limit = 10
+                  Limit = _maximumItemsToReturn
               }
             );
 
             var jsonProducts = productItems
-                .Select(p => new ProductView { Id = p.Id, Name = p.Name });
+                .Select(p => new ProductView { Id = p.Id, Name = p.Name, Type = p.Type });
 
             return jsonProducts;
         }
 
-        //  /umbraco/backoffice/StripePickerPlugin/StripePicker/GetPlans
+        /// <summary>
+        /// /umbraco/backoffice/StripePickerPlugin/StripePicker/GetPlans
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<PlanView> GetPlans()
         {
@@ -44,14 +47,36 @@ namespace StripePicker.Backoffice.Controllers
             StripeList<StripePlan> planItems = planService.List(
               new StripePlanListOptions()
               {
-                  Limit = 10
+                  Limit = _maximumItemsToReturn
               }
             );
             var jsonPlans = planItems
-                .Select(p => new PlanView { Id = p.Id, Name = $"{p.Nickname} ({p.Amount.ToString()} {p.Currency}/{p.Interval})", ProductId = p.ProductId })
+                .Select(p => new PlanView { Id = p.Id, Name = $"{p.Nickname} ({p.Currency} {p.Amount.ToString()}/{p.Interval})", ProductId = p.ProductId })
                 .ToList();
 
             return jsonPlans;
+        }
+
+        /// <summary>
+        /// /umbraco/backoffice/StripePickerPlugin/StripePicker/GetSkus
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IEnumerable<SkuView> GetSkus()
+        {
+            SetStripeKey();
+            var skuService = new StripeSkuService();
+            StripeList<StripeSku> skuItems = skuService.List(
+              new StripeSkuListOptions
+              {
+                  Limit = _maximumItemsToReturn
+              }
+            );
+
+            var jsonProducts = skuItems
+                .Select(p => new SkuView { Id = p.Id, Price = p.Price, ProductId = p.ProductId, Currency = p.Currency });
+
+            return jsonProducts;
         }
 
         private static void SetStripeKey()

@@ -248,7 +248,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\StripePicker\stripepicker.sku.controller.js" />
     <Content Include="App_Plugins\StripePicker\stripepicker.plan.controller.js" />
+    <Content Include="App_Plugins\StripePicker\stripepicker.sku.picker.htm" />
     <Content Include="App_Plugins\StripePicker\stripepicker.resources.js" />
     <Content Include="config\imageprocessor\security.config" />
     <Content Include="config\imageprocessor\processing.config" />

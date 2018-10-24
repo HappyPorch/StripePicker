@@ -1,13 +1,13 @@
-﻿<div ng-controller="stripepicker.product.controller">
+﻿<div ng-controller="stripepicker.sku.controller">
 
     <div ng-show="!data.ready">
         Fetching products...
     </div>
 
     <div ng-show="data.ready && !data.error">
-        <select ng-model="model.value" name="productSelect" id="productSelect" ng-options="p.Id as p.Name for p in data.allSubscriptionProducts" class="umb-editor umb-select">
+        <select ng-model="model.value" name="skuSelect" id="skuSelect" ng-options="p.Id as p.FullName for p in data.allSkus" class="umb-editor umb-select">
             <option value=""></option>
-        </select>    
+        </select>
     </div>
 
     <div ng-show="data.ready && data.error" class="alert alert-danger" role="alert">

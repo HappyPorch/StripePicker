@@ -8,9 +8,19 @@
     stripeService.plans.ready = false;
     stripeService.plans.allPlans = [];
 
+    stripeService.skus = {};
+    stripeService.skus.ready = false;
+    stripeService.skus.allSkus = [];
+
     stripeService.fetchProducts = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetProducts");
 
     stripeService.fetchPlans = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetPlans");
+
+    stripeService.fetchSkus = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetSkus");
+
+    function subscriptionProducts(p) {
+        return p.Type === "service";
+    }
 
     async function getProducts() {
         if (stripeService.products.ready) return stripeService.products;
@@ -24,6 +34,7 @@
                     stripeService.products.allProducts.push(data[product]);
                 }
             }
+            stripeService.products.allSubscriptionProducts = stripeService.products.allProducts.filter(subscriptionProducts);
         }
         catch (error) {
             stripeService.products.error = error.data.ExceptionMessage;
@@ -50,7 +61,7 @@
             for (var plan in data) {
                 if (data.hasOwnProperty(plan)) {
                     var productName = products.allProducts.filter(prod => {
-                        return prod.Id === data[plan].ProductId
+                        return prod.Id === data[plan].ProductId;
                     })[0].Name;
                     data[plan].FullName = productName + ": " + data[plan].Name;
                     stripeService.plans.allPlans.push(data[plan]);
@@ -64,6 +75,33 @@
         stripeService.plans.ready = true;
         return stripeService.plans;
     };
+
+    stripeService.getSkus = async () => {
+        if (stripeService.skus.ready) return stripeService.skus;
+
+        var skus = await stripeService.getProducts();
+
+        var res;
+        try {
+            res = await stripeService.fetchSkus;
+            var data = res.data;
+            for (var sku in data) {
+                if (data.hasOwnProperty(sku)) {
+                    var productName = skus.allProducts.filter(prod => {
+                        return prod.Id === data[sku].ProductId;
+                    })[0].Name;
+                    data[sku].FullName = productName + " (" + data[sku].Currency + " " + data[sku].Price + ")";
+                    stripeService.skus.allSkus.push(data[sku]);
+                }
+            }
+        }
+        catch (error) {
+            stripeService.skus.error = error.data.ExceptionMessage;
+        }
+        stripeService.skus.ready = true;
+        return stripeService.skus;
+    };
+
     return stripeService;
 
 });

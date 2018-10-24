@@ -13,11 +13,19 @@
       "editor": {
         "view": "~/App_Plugins/StripePicker/stripepicker.plan.picker.htm"
       }
+    },
+    {
+      "alias": "stripepicker.skupicker",
+      "name": "Stripe Sku Picker",
+      "editor": {
+        "view": "~/App_Plugins/StripePicker/stripepicker.sku.picker.htm"
+      }
     }
   ],
   "javascript": [
     "~/App_Plugins/StripePicker/stripepicker.product.controller.js",
     "~/App_Plugins/StripePicker/stripepicker.plan.controller.js",
+    "~/App_Plugins/StripePicker/stripepicker.sku.controller.js",
     "~/App_Plugins/StripePicker/stripepicker.resources.js"
   ]
 }
