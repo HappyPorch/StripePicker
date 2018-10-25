@@ -47,6 +47,11 @@
                     stripeService.products.allProducts.push(data[product]);
                 }
             }
+            stripeService.products.allProducts = stripeService.products.allProducts.sort(function (a, b) {
+                var x = a.Name.toLowerCase();
+                var y = b.Name.toLowerCase();
+                return x < y ? -1 : x > y ? 1 : 0;
+            });
             stripeService.products.allSubscriptionProducts = stripeService.products.allProducts.filter(subscriptionProducts);
         }
         catch (error) {
@@ -82,6 +87,11 @@
                     stripeService.plans.allPlans.push(data[plan]);
                 }
             }
+            stripeService.plans.allPlans = stripeService.plans.allPlans.sort(function (a, b) {
+                var x = a.FullName.toLowerCase();
+                var y = b.FullName.toLowerCase();
+                return x < y ? -1 : x > y ? 1 : 0;
+            });
         }
         catch (error) {
             stripeService.plans.error = error.data.ExceptionMessage;
@@ -110,6 +120,11 @@
                     stripeService.skus.allSkus.push(data[sku]);
                 }
             }
+            stripeService.skus.allSkus = stripeService.skus.allSkus.sort(function (a, b) {
+                var x = a.FullName.toLowerCase();
+                var y = b.FullName.toLowerCase();
+                return x < y ? -1 : x > y ? 1 : 0;
+            });
         }
         catch (error) {
             stripeService.skus.error = error.data.ExceptionMessage;
