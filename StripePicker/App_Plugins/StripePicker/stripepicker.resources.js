@@ -78,7 +78,7 @@
                     })[0].Name;
                     var currencySign = getCurrencySign(data[plan].Currency);
                     data[plan].FullName = productName + ": " + data[plan].Name + " (" + currencySign
-                        + "" + data[plan].Amount + "/" + data[plan].Interval + ")";
+                        + "" + data[plan].Amount/100 + "/" + data[plan].Interval + ")";
                     stripeService.plans.allPlans.push(data[plan]);
                 }
             }
@@ -106,7 +106,7 @@
                         return prod.Id === data[sku].ProductId;
                     })[0].Name;
                     var currencySign = getCurrencySign(data[sku].Currency);
-                    data[sku].FullName = productName + " (" + currencySign + "" + data[sku].Price + ")";
+                    data[sku].FullName = productName + " (" + currencySign + "" + data[sku].Price/100 + ")";
                     stripeService.skus.allSkus.push(data[sku]);
                 }
             }
