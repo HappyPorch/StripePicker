@@ -81,7 +81,7 @@ namespace StripePicker.Backoffice.Controllers
 
         private static void SetStripeKey()
         {
-            var stripeApiKey = ConfigurationManager.AppSettings["StripePicker.StripeApiKey"];
+            var stripeApiKey = ConfigurationManager.AppSettings["StripePicker.StripePrivateApiKey"];
             StripeConfiguration.SetApiKey(stripeApiKey);
         }
     }
