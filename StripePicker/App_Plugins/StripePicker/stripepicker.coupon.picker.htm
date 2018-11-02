@@ -1,0 +1,17 @@
+﻿<div ng-controller="stripepicker.coupon.controller">
+
+    <div ng-show="!data.ready">
+        Fetching coupons...
+    </div>
+
+    <div ng-show="data.ready && !data.error">
+        <select ng-model="model.value" name="couponSelect" id="couponSelect" ng-options="c.Name for c in data.allCoupons track by c.Id" class="umb-editor umb-select">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div ng-show="data.ready && data.error" class="alert alert-danger" role="alert">
+        Unable to fetch coupons from Stripe: {{data.error}}
+    </div>
+
+</div>

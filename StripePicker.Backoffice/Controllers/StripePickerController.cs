@@ -12,7 +12,7 @@ namespace StripePicker.Backoffice.Controllers
     [PluginController("StripePickerPlugin")]
     public class StripePickerController : UmbracoAuthorizedApiController
     {
-        private const int _maximumItemsToReturn = 20;
+        private const int _maximumItemsToReturn = 50;
         /// <summary>
         /// /umbraco/backoffice/StripePickerPlugin/StripePicker/GetProducts
         /// </summary>
@@ -75,6 +75,29 @@ namespace StripePicker.Backoffice.Controllers
 
             var jsonProducts = skuItems
                 .Select(p => new SkuView { Id = p.Id, Price = p.Price, ProductId = p.ProductId, Currency = p.Currency });
+
+            return jsonProducts;
+        }
+
+        /// <summary>
+        /// /umbraco/backoffice/StripePickerPlugin/StripePicker/GetCoupons
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IEnumerable<CouponView> GetCoupons()
+        {
+            SetStripeKey();
+            var couponService = new StripeCouponService();
+            StripeList<StripeCoupon> couponItems = couponService.List(
+              new StripeCouponListOptions
+              {
+                  Limit = _maximumItemsToReturn,
+              }
+            );
+
+            var jsonProducts = couponItems
+                .Where(c => c.Valid)
+                .Select(p => new CouponView { Id = p.Id, Name = p.Name, AmountOff = p.AmountOff, PercentOff = p.PercentOff, Currency = p.Currency });
 
             return jsonProducts;
         }

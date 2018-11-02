@@ -12,11 +12,17 @@
     stripeService.skus.ready = false;
     stripeService.skus.allSkus = [];
 
+    stripeService.coupons = {};
+    stripeService.coupons.ready = false;
+    stripeService.coupons.allCoupons = [];
+
     stripeService.fetchProducts = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetProducts");
 
     stripeService.fetchPlans = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetPlans");
 
     stripeService.fetchSkus = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetSkus");
+
+    stripeService.fetchCoupons = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetCoupons");
 
     function subscriptionProducts(p) {
         return p.Type === "service";
@@ -131,6 +137,31 @@
         }
         stripeService.skus.ready = true;
         return stripeService.skus;
+    };
+
+    stripeService.getCoupons = async () => {
+        if (stripeService.coupons.ready) return stripeService.coupons;
+
+        var res;
+        try {
+            res = await stripeService.fetchCoupons;
+            var data = res.data;
+            for (var coupon in data) {
+                if (data.hasOwnProperty(coupon)) {
+                    stripeService.coupons.allCoupons.push(data[coupon]);
+                }
+            }
+            stripeService.coupons.allCoupons = stripeService.coupons.allCoupons.sort(function (a, b) {
+                var x = a.Name.toLowerCase();
+                var y = b.Name.toLowerCase();
+                return x < y ? -1 : x > y ? 1 : 0;
+            });
+        }
+        catch (error) {
+            stripeService.coupons.error = error.data.ExceptionMessage;
+        }
+        stripeService.coupons.ready = true;
+        return stripeService.coupons;
     };
 
     return stripeService;

@@ -216,6 +216,7 @@
     <Compile Include="Controllers\StripePickerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\PlanView.cs" />
+    <Compile Include="ViewModel\CouponView.cs" />
     <Compile Include="ViewModel\SkuView.cs" />
     <Compile Include="ViewModel\ProductView.cs" />
   </ItemGroup>
