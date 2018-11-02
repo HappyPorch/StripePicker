@@ -5,9 +5,9 @@
     </div>
 
     <div ng-show="data.ready && !data.error">
-        <select ng-model="model.value" name="productSelect" id="productSelect" ng-options="p.Id as p.Name for p in data.allSubscriptionProducts" class="umb-editor umb-select">
+        <select ng-model="model.value" name="productSelect" id="productSelect" ng-options="p.Name for p in data.allSubscriptionProducts track by p.Id" class="umb-editor umb-select">
             <option value=""></option>
-        </select>    
+        </select>
     </div>
 
     <div ng-show="data.ready && data.error" class="alert alert-danger" role="alert">

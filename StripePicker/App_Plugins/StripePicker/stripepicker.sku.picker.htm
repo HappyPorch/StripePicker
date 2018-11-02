@@ -5,7 +5,7 @@
     </div>
 
     <div ng-show="data.ready && !data.error">
-        <select ng-model="model.value" name="skuSelect" id="skuSelect" ng-options="p.Id as p.FullName for p in data.allSkus" class="umb-editor umb-select">
+        <select ng-model="model.value" name="skuSelect" id="skuSelect" ng-options="s.FullName for s in data.allSkus track by s.Id" class="umb-editor umb-select">
             <option value=""></option>
         </select>
     </div>
