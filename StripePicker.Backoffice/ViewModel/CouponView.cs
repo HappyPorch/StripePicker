@@ -10,7 +10,7 @@ namespace StripePicker.Backoffice.ViewModel
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public int? AmountOff { get; set; }
+        public long? AmountOff { get; set; }
         public decimal? PercentOff { get; set; }
         public string Currency { get; set; }
     }

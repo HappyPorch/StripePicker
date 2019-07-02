@@ -21,9 +21,9 @@ namespace StripePicker.Backoffice.Controllers
         public IEnumerable<ProductView> GetProducts()
         {
             SetStripeKey();
-            var productService = new StripeProductService();
-            StripeList<StripeProduct> productItems = productService.List(
-              new StripeProductListOptions()
+            var productService = new ProductService();
+            StripeList<Product> productItems = productService.List(
+              new ProductListOptions()
               {
                   Limit = _maximumItemsToReturn
               }
@@ -43,9 +43,9 @@ namespace StripePicker.Backoffice.Controllers
         public IEnumerable<PlanView> GetPlans()
         {
             SetStripeKey();
-            var planService = new StripePlanService();
-            StripeList<StripePlan> planItems = planService.List(
-              new StripePlanListOptions()
+            var planService = new PlanService();
+            StripeList<Plan> planItems = planService.List(
+              new PlanListOptions()
               {
                   Limit = _maximumItemsToReturn
               }
@@ -65,9 +65,9 @@ namespace StripePicker.Backoffice.Controllers
         public IEnumerable<SkuView> GetSkus()
         {
             SetStripeKey();
-            var skuService = new StripeSkuService();
-            StripeList<StripeSku> skuItems = skuService.List(
-              new StripeSkuListOptions
+            var skuService = new SkuService();
+            StripeList<Sku> skuItems = skuService.List(
+              new SkuListOptions
               {
                   Limit = _maximumItemsToReturn
               }
@@ -87,9 +87,9 @@ namespace StripePicker.Backoffice.Controllers
         public IEnumerable<CouponView> GetCoupons()
         {
             SetStripeKey();
-            var couponService = new StripeCouponService();
-            StripeList<StripeCoupon> couponItems = couponService.List(
-              new StripeCouponListOptions
+            var couponService = new CouponService();
+            StripeList<Coupon> couponItems = couponService.List(
+              new CouponListOptions
               {
                   Limit = _maximumItemsToReturn,
               }
@@ -105,7 +105,7 @@ namespace StripePicker.Backoffice.Controllers
         private static void SetStripeKey()
         {
             var stripeApiKey = ConfigurationManager.AppSettings["StripePicker.StripePrivateApiKey"];
-            StripeConfiguration.SetApiKey(stripeApiKey);
+            StripeConfiguration.ApiKey = stripeApiKey;
         }
     }
 }

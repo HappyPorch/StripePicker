@@ -133,8 +133,8 @@
     <Reference Include="SQLCE4Umbraco, Version=1.0.6628.38730, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.7.13\lib\net45\SQLCE4Umbraco.dll</HintPath>
     </Reference>
-    <Reference Include="Stripe.net, Version=19.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stripe.net.19.10.0\lib\net45\Stripe.net.dll</HintPath>
+    <Reference Include="Stripe.net, Version=27.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.27.4.0\lib\net45\Stripe.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
