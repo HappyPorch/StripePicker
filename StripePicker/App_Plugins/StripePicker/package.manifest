@@ -27,6 +27,13 @@
       "editor": {
         "view": "~/App_Plugins/StripePicker/stripepicker.coupon.picker.htm"
       }
+    },
+    {
+      "alias": "stripepicker.taxratepicker",
+      "name": "Stripe Tax Rate Picker",
+      "editor": {
+        "view": "~/App_Plugins/StripePicker/stripepicker.taxrate.picker.htm"
+      }
     }
   ],
   "javascript": [
@@ -34,6 +41,7 @@
     "~/App_Plugins/StripePicker/stripepicker.plan.controller.js",
     "~/App_Plugins/StripePicker/stripepicker.sku.controller.js",
     "~/App_Plugins/StripePicker/stripepicker.coupon.controller.js",
+    "~/App_Plugins/StripePicker/stripepicker.taxrate.controller.js",
     "~/App_Plugins/StripePicker/stripepicker.resources.js"
   ]
 }

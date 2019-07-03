@@ -102,6 +102,31 @@ namespace StripePicker.Backoffice.Controllers
             return jsonProducts;
         }
 
+        /// <summary>
+        /// /umbraco/backoffice/StripePickerPlugin/StripePicker/GetTaxRates
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IEnumerable<TaxRateView> GetTaxRates()
+        {
+            SetStripeKey();
+
+            var taxRateService = new TaxRateService();
+            var taxRates = taxRateService.List(new TaxRateListOptions()
+            {
+                Active = true,
+                Limit = _maximumItemsToReturn,
+            });
+
+            return taxRates.Select(x => new TaxRateView()
+            {
+                Id = x.Id,
+                DisplayName = x.DisplayName,
+                Description = x.Description,
+                Percentage = x.Percentage
+            });
+        }
+
         private static void SetStripeKey()
         {
             var stripeApiKey = ConfigurationManager.AppSettings["StripePicker.StripePrivateApiKey"];

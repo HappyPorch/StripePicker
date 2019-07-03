@@ -1,0 +1,17 @@
+﻿<div ng-controller="stripepicker.taxrate.controller">
+
+    <div ng-show="!data.ready">
+        Fetching tax rates...
+    </div>
+
+    <div ng-show="data.ready && !data.error">
+        <select ng-model="model.value" name="taxRatesSelect" id="taxRatesSelect" ng-options="x.UmbDisplayName for x in data.allTaxRates track by x.Id" class="umb-editor umb-select">
+            <option value=""></option>
+        </select>
+    </div>
+
+    <div ng-show="data.ready && data.error" class="alert alert-danger" role="alert">
+        Unable to fetch tax rates from Stripe: {{ data.error }}
+    </div>
+
+</div>

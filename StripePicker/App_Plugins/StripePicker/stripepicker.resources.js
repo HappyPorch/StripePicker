@@ -1,4 +1,4 @@
-﻿angular.module("umbraco.resources").factory("stripeResources", function ($http) {
+angular.module("umbraco.resources").factory("stripeResources", function ($http) {
     var stripeService = {};
     stripeService.products = {};
     stripeService.products.ready = false;
@@ -16,6 +16,10 @@
     stripeService.coupons.ready = false;
     stripeService.coupons.allCoupons = [];
 
+    stripeService.taxRates = {};
+    stripeService.taxRates.ready = false;
+    stripeService.taxRates.allTaxRates = [];
+
     stripeService.fetchProducts = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetProducts");
 
     stripeService.fetchPlans = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetPlans");
@@ -23,6 +27,8 @@
     stripeService.fetchSkus = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetSkus");
 
     stripeService.fetchCoupons = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetCoupons");
+
+    stripeService.fetchTaxRates = $http.get("/umbraco/backoffice/StripePickerPlugin/StripePicker/GetTaxRates");
 
     function subscriptionProducts(p) {
         return p.Type === "service";
@@ -152,8 +158,8 @@
                 }
             }
             stripeService.coupons.allCoupons = stripeService.coupons.allCoupons.sort(function (a, b) {
-                var x = a.Name.toLowerCase();
-                var y = b.Name.toLowerCase();
+                var x = a.Name !== undefined ? a.Name.toLowerCase() : '';
+                var y = b.Name !== undefined ? b.Name.toLowerCase() : '';
                 return x < y ? -1 : x > y ? 1 : 0;
             });
         }
@@ -164,6 +170,31 @@
         return stripeService.coupons;
     };
 
-    return stripeService;
+    stripeService.getTaxRates = async () => {
+        if (stripeService.taxRates.ready)
+            return stripeService.taxRates;
 
+        var res;
+
+        try {
+            res = await stripeService.fetchTaxRates;
+            var data = res.data;
+
+            for (var taxRate in data) {
+                if (data.hasOwnProperty(taxRate)) {
+                    data[taxRate].UmbDisplayName = data[taxRate].Description + " - " + data[taxRate].DisplayName + " (" + data[taxRate].Percentage + "%)";
+                    stripeService.taxRates.allTaxRates.push(data[taxRate]);
+                }
+            }
+        }
+        catch (err) {
+            stripeService.taxRates.error = error.data.ExceptionMessage;
+        }
+
+        stripeService.taxRates.ready = true;
+
+        return stripeService.taxRates;
+    };
+
+    return stripeService;
 });

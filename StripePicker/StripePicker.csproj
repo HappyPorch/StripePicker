@@ -254,6 +254,8 @@
     <Content Include="App_Plugins\StripePicker\stripepicker.coupon.picker.htm" />
     <Content Include="App_Plugins\StripePicker\stripepicker.sku.picker.htm" />
     <Content Include="App_Plugins\StripePicker\stripepicker.resources.js" />
+    <Content Include="App_Plugins\StripePicker\stripepicker.taxrate.controller.js" />
+    <Content Include="App_Plugins\StripePicker\stripepicker.taxrate.picker.htm" />
     <Content Include="config\imageprocessor\security.config" />
     <Content Include="config\imageprocessor\processing.config" />
     <Content Include="config\imageprocessor\cache.config" />

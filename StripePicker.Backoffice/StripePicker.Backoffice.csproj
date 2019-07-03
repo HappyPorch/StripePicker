@@ -219,6 +219,7 @@
     <Compile Include="ViewModel\CouponView.cs" />
     <Compile Include="ViewModel\SkuView.cs" />
     <Compile Include="ViewModel\ProductView.cs" />
+    <Compile Include="ViewModel\TaxRateView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
